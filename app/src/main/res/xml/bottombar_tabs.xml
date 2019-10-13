@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_attendance"
+        icon="@drawable/ic_attendance" />
+    <tab
+        id="@+id/tab_home"
+        icon="@drawable/ic_home"/>
+    <tab
+        id="@+id/tab_gift"
+        icon="@drawable/ic_gift"/>
+</tabs>

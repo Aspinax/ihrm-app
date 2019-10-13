@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "710466602056",
+    "firebase_url": "https://ihrm-events-app.firebaseio.com",
+    "project_id": "ihrm-events-app",
+    "storage_bucket": "ihrm-events-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710466602056:android:e631ce1a1e726d04",
+        "android_client_info": {
+          "package_name": "com.aspinax.ihrm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710466602056-c64204q4cauu2cqm53nhu2gllcr8ennf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aspinax.ihrm",
+            "certificate_hash": "b4bd3a05cd9dce1035f969213bbfad10fc5a3b51"
+          }
+        },
+        {
+          "client_id": "710466602056-8d1g1lfuvbnvfjamueuciqob0a76l03o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCL1AufeulJImwwju8HPSzpzoyZm2O-j7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710466602056-8d1g1lfuvbnvfjamueuciqob0a76l03o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

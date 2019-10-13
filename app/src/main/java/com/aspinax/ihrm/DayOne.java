@@ -1,0 +1,156 @@
+package com.aspinax.ihrm;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class DayOne extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final String TAG = "DayOne";
+    private FirebaseAuth auth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_day_one);
+
+        auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() == null) {
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+        }
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.WHITE);
+        }
+        getSupportActionBar().hide();
+
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        //end of user experience
+        ImageView gotoattendance = findViewById(R.id.gotoattendance);
+
+        gotoattendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DayOne.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        db.collection("delegates")
+                .orderBy("attendee").limit(25)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            final List<Attendees> attendanceList = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Attendees attend = document.toObject(Attendees.class);
+                                attendanceList.add(attend);
+                            }
+
+                            ListView attendeeList = findViewById(R.id.attendeeList);
+                            final attendeeAdapter attendeeAdapt = new attendeeAdapter(DayOne.this, attendanceList, 15);
+                            attendeeList.setAdapter(attendeeAdapt);
+//                            if (task.getResult().size() > 0) {
+//                                lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
+//                                firstVisible = task.getResult().getDocuments().get(0);
+//                            }
+                        }
+                    };
+                });
+
+
+
+        FloatingActionButton launchqr = findViewById(R.id.launchqr);
+
+        launchqr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator integrator = new IntentIntegrator(DayOne.this);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+                integrator.setPrompt("Align the QR code.");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(true);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.setOrientationLocked(true);
+                integrator.setCaptureActivity(CaptureActivityPortrait.class);
+                integrator.initiateScan();
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /* Handles the results of the QR Scan */
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Log.e("Scan*******", "Cancelled scan");
+
+            } else {
+                /* QR Scan successful */
+                Log.e("Scan", "Scanned");
+
+                /* fetch attendee information from firebase */
+                DocumentReference ticketRef = db.collection("delegates").document(result.getContents());
+                ticketRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                /* attendee found */;
+                                qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"));
+                                alert.showDialog(DayOne.this, "found");
+
+                                Map<String, Object> checkInInfo = new HashMap<>();
+                                checkInInfo.put("checkIn15", true);
+                                db.collection("delegates").document(document.getString("unique_id")).update(checkInInfo);
+                            } else {
+                                /* id not found */
+                                Toast.makeText(DayOne.this, "Unique ID not found.", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            /* error */
+                            Log.d(TAG, "get failed with ", task.getException());
+                        }
+                    }
+                });
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+}

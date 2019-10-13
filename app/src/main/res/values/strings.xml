@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">IHRM</string>
+    <string name="total_attendance">Total Attendance</string>
+    <string name="_1253">1253</string>
+    <string name="paid_bookings">Paid Bookings</string>
+    <string name="_640">640</string>
+    <string name="delegates">Delegates</string>
+    <string name="credit_bookings">Credit Bookings</string>
+    <string name="unpaid_bookings">Unpaid Bookings</string>
+    <string name="daily_attendance">Daily Attendance</string>
+    <string name="day_one">Day One</string>
+    <string name="day_two">Day Two</string>
+    <string name="day_three">Day Three</string>
+    <string name="day_four">Day Four</string>
+    <string name="gift_issuance">Gift Issuance</string>
+    <string name="check_in_s">Check In\'s</string>
+    <string name="login_email">Enter Email</string>
+    <string name="login_password">Enter Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="loading">Loading&#8230;</string>
+</resources>

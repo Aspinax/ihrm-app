@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/checkindelegate"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/borderbottom">
+        <TextView
+            android:id="@+id/attendeeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:fontFamily="@font/markregular"
+            android:textColor="#5C6160"
+            android:text="Delegates Name"/>
+        <ImageView
+            android:id="@+id/checkedInBox"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_unchecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
