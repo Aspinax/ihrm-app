@@ -34,28 +34,40 @@ public class giftFragment extends Fragment {
         gotogiftdayone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), GiftDayOne.class);
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 15);
+                intent.putExtra("event", "gift");
+                intent.putExtra("text", "Gift Picking");
                 startActivity(intent);
             }
         });
         gotogiftdaytwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), GiftDayTwo.class);
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 16);
+                intent.putExtra("event", "gift");
+                intent.putExtra("text", "Gift Picking");
                 startActivity(intent);
             }
         });
         gotogiftdaythree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), GiftDayThree.class);
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 17);
+                intent.putExtra("event", "gift");
+                intent.putExtra("text", "Gift Picking");
                 startActivity(intent);
             }
         });
         gotogiftdayfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), GiftDayFour.class);
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 18);
+                intent.putExtra("event", "gift");
+                intent.putExtra("text", "Gift Picking");
                 startActivity(intent);
             }
         });

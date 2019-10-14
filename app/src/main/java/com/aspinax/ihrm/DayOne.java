@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -48,8 +49,6 @@ public class DayOne extends AppCompatActivity {
     private DocumentSnapshot firstVisible;
     private String lastCommand;
 
-    final Integer date = getIntent().getExtras().getInt("date");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,9 +82,15 @@ public class DayOne extends AppCompatActivity {
 
         final RelativeLayout next = findViewById(R.id.PreviousPage);
         final RelativeLayout previous = findViewById(R.id.NextPage);
+        final Integer date = getIntent().getExtras().getInt("date");
+        final String text = getIntent().getExtras().getString("text");
 
         // Search
         EditText search = findViewById(R.id.search);
+        TextView dateView = findViewById(R.id.firstdatetext);
+        TextView textView = findViewById(R.id.attendancelisttext);
+        dateView.setText(date + "th October 2019");
+        textView.setText(text);
 
         db.collection("delegates")
                 .orderBy("attendee").limit(25)
@@ -206,6 +211,8 @@ public class DayOne extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final Integer date = getIntent().getExtras().getInt("date");
+        final String event = getIntent().getExtras().getString("event");
         /* Handles the results of the QR Scan */
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
@@ -226,20 +233,20 @@ public class DayOne extends AppCompatActivity {
                             if (document.exists()) {
                                 /* attendee found */;
 //                                final String dateStr = getIntent().getStringExtra("date");
-                                Log.d(TAG, "checkIn" + date);
-                                if (!document.getBoolean("checkIn" + date)) {
+
+                                if (!document.getBoolean(event + date)) {
                                     Date todayDate = Calendar.getInstance().getTime();
                                     SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
                                     final String time = timeF.format(todayDate);
 
                                     Map<String, Object> checkInInfo = new HashMap<>();
-                                    checkInInfo.put("checkIn" + date, true);
-                                    checkInInfo.put("checkIn" + date + "Time", time);
+                                    checkInInfo.put(event + date, true);
+                                    checkInInfo.put(event + date + "Time", time);
                                     db.collection("delegates").document(document.getString("unique_id")).update(checkInInfo);
-
-                                    qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"));
-                                    alert.showDialog(DayOne.this, "found");
                                 }
+
+                                qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"), event);
+                                alert.showDialog(DayOne.this, "found");
                                 } else {
                                 /* id not found */
                                 Toast.makeText(DayOne.this, "Unique ID not found.", Toast.LENGTH_LONG).show();

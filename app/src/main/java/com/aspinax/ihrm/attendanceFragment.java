@@ -36,6 +36,8 @@ public class attendanceFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DayOne.class);
                 intent.putExtra("date", 15);
+                intent.putExtra("event", "checkIn");
+                intent.putExtra("text", "Attendance List");
                 startActivity(intent);
             }
         });
@@ -44,32 +46,31 @@ public class attendanceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DayOne.class);
-                intent.putExtra("date", 15);
+                intent.putExtra("date", 16);
+                intent.putExtra("event", "checkIn");
+                intent.putExtra("text", "Attendance List");
                 startActivity(intent);
             }
         });
 
-//        gotodaytwo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), DayOne.class);
-//                intent.putExtra("date", 16);
-//                startActivity(intent);
-//            }
-//        });
         gotodaythree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DayOne.class);
                 intent.putExtra("date", 17);
+                intent.putExtra("event", "checkIn");
+                intent.putExtra("text", "Attendance List");
                 startActivity(intent);
             }
         });
+
         gotodayfour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DayOne.class);
                 intent.putExtra("date", 18);
+                intent.putExtra("event", "checkIn");
+                intent.putExtra("text", "Attendance List");
                 startActivity(intent);
             }
         });

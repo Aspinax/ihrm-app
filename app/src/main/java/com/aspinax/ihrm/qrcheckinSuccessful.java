@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 public class qrcheckinSuccessful{
     private String delegateName;
     private String sponsorName;
+    private String event;
 
     qrcheckinSuccessful() {};
 
@@ -32,9 +33,10 @@ public class qrcheckinSuccessful{
         return capMatcher.appendTail(capBuffer).toString();
     }
 
-    qrcheckinSuccessful(String delegate_name, String sponsor_name) {
+    qrcheckinSuccessful(String delegate_name, String sponsor_name, String event) {
         this.delegateName = delegate_name;
         this.sponsorName = sponsor_name;
+        this.event = event;
     }
 
     public void showDialog(Activity activity, String msg){
@@ -57,6 +59,7 @@ public class qrcheckinSuccessful{
         TextView delegatenames = dialog.findViewById(R.id.delegatenames);
         TextView firstletter = dialog.findViewById(R.id.firstletter);
         TextView sponsorname = dialog.findViewById(R.id.sponsorname);
+        TextView header = dialog.findViewById(R.id.checkintext);
 
 //        String delegatename = "Delegate Name";
 
@@ -66,9 +69,17 @@ public class qrcheckinSuccessful{
         String correctsponsorname = capitalize(lowercasesponsor);
         String firstchar = this.delegateName.substring(0,1);
 
+        String headerTxt;
+        if (this.event == "gift") {
+            headerTxt = "gift-pick";
+        } else {
+            headerTxt = "checked-in";
+        }
+
         delegatenames.setText(correctdelegatename);
         firstletter.setText(firstchar);
         sponsorname.setText(correctsponsorname);
+        header.setText(this.event);
 
         Button dialogButton = dialog.findViewById(R.id.Done);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
