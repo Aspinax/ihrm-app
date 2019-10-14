@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:background="#FFF"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+    <ImageView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="144dp"
+        android:layout_width="40dp"
+        android:id="@+id/loginlogo"
+        android:layout_height="40dp"
+        android:src="@drawable/logo"/>
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/loginlogo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IHRM"
+        android:id="@+id/logotext"
+        android:textColor="#000807"
+        android:textSize="16dp"
+        android:fontFamily="@font/markbold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        app:layout_constraintTop_toBottomOf="@id/logotext"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/markregular"
+        android:layout_marginTop="24dp"
+        android:textColor="#8B8B8B"
+        android:id="@+id/eventreason"
+        android:text="Event Management Platform"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/eventreason"
+        app:layout_constraintBottom_toTopOf="@id/signupBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/Fname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First name"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="16dp"
+                android:textColor="#000807"
+                android:fontFamily="@font/markregular"
+                android:textSize="14sp"
+                android:background="@drawable/borderbottom"
+                android:textColorHint="#707070"
+                android:layout_weight="0.5"
+                tools:ignore="MissingPrefix" />
+            <EditText
+                android:id="@+id/Lname"
+                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last name"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="16dp"
+                android:textColor="#000807"
+                android:fontFamily="@font/markregular"
+                android:textSize="14sp"
+                android:background="@drawable/borderbottom"
+                android:textColorHint="#707070"
+                tools:ignore="MissingPrefix" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/newEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter email address"
+            android:paddingStart="8dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="16dp"
+            android:textColor="#000807"
+            android:fontFamily="@font/markregular"
+            android:textSize="14sp"
+            android:background="@drawable/borderbottom"
+            android:textColorHint="#707070"
+            tools:ignore="MissingPrefix" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/rawpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter password"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="16dp"
+                android:textColor="#000807"
+                android:fontFamily="@font/markregular"
+                android:textSize="14sp"
+                android:background="@drawable/borderbottom"
+                android:textColorHint="#707070"
+                android:layout_weight="0.5"
+                tools:ignore="MissingPrefix" />
+            <EditText
+                android:id="@+id/password"
+                android:layout_weight="0.5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm password"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="16dp"
+                android:textColor="#000807"
+                android:fontFamily="@font/markregular"
+                android:textSize="14sp"
+                android:background="@drawable/borderbottom"
+                android:textColorHint="#707070"
+                tools:ignore="MissingPrefix" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signupBtn"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/borderradius16"
+        android:backgroundTint="#CCA034"
+        android:textColor="#FFF"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:textSize="13dp"
+        android:fontFamily="@font/markmedium"
+        android:text="Sign Up"
+        android:drawableEnd="@drawable/ic_chevron"
+        style="?android:attr/borderlessButtonStyle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

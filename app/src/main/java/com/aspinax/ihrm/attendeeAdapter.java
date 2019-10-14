@@ -17,6 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class attendeeAdapter extends ArrayAdapter<Attendees> {
@@ -28,18 +30,35 @@ public class attendeeAdapter extends ArrayAdapter<Attendees> {
         this.date = date;
     }
 
+    private String capitalize(String capString){
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()){
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
+
+        return capMatcher.appendTail(capBuffer).toString();
+    }
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         if(convertView == null){
             convertView =  ((Activity)getContext()).getLayoutInflater().inflate(R.layout.item_attendee,parent,false);
         }
 
+
+
         TextView attendee_nameTextView = convertView.findViewById(R.id.attendeeName);
         ImageView checkImg = convertView.findViewById(R.id.checkedInBox);
 
         final Attendees attendee = getItem(position);
 
-        attendee_nameTextView.setText(attendee.getAttendee());
+        String pure_names = attendee.getAttendee();
+        String lowercase = pure_names.toLowerCase();
+        String fixed_names = capitalize(lowercase);
+        attendee_nameTextView.setText(fixed_names);
+
         Boolean checkedIn = false;
 
         switch(this.date) {
@@ -59,10 +78,11 @@ public class attendeeAdapter extends ArrayAdapter<Attendees> {
 
         if (checkedIn) {
             checkImg.setBackgroundResource(R.drawable.ic_checked);
+        }else{
+            checkImg.setBackgroundResource(R.drawable.ic_unchecked);
         }
 
         RelativeLayout checkindelegate = convertView.findViewById(R.id.checkindelegate);
-        final MediaPlayer success = MediaPlayer.create(getContext(), R.raw.success);
         checkindelegate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,10 +92,13 @@ public class attendeeAdapter extends ArrayAdapter<Attendees> {
 
                 CheckinSuccessful alert = new CheckinSuccessful();
                 alert.showDialog((Activity)getContext(), "You may now let the attendee in!");
-                success.start();
             }
         });
 
+
+
         return convertView;
+
+
     }
 }

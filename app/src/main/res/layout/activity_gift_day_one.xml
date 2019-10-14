@@ -28,7 +28,7 @@
         android:textSize="20sp"
         android:textColor="#000807"
         android:fontFamily="@font/markbold"
-        android:text="Attendance List" />
+        android:text="Gift Picking" />
     <TextView
         app:layout_constraintTop_toBottomOf="@id/attendancelisttext"
         app:layout_constraintStart_toStartOf="parent"

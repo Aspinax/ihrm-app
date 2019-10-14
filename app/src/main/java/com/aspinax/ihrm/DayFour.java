@@ -39,21 +39,19 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
-public class DayOne extends AppCompatActivity {
+public class DayFour extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static final String TAG = "DayOne";
+    private static final String TAG = "DayFour";
     private FirebaseAuth auth;
     private DocumentSnapshot lastVisible;
     private DocumentSnapshot firstVisible;
     private String lastCommand;
 
-    final Integer date = getIntent().getExtras().getInt("date");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_day_one);
+        setContentView(R.layout.activity_day_four);
 
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
@@ -75,7 +73,7 @@ public class DayOne extends AppCompatActivity {
         gotoattendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DayOne.this, MainActivity.class);
+                Intent intent = new Intent(DayFour.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -101,7 +99,7 @@ public class DayOne extends AppCompatActivity {
                             }
 
                             ListView attendeeList = findViewById(R.id.attendeeList);
-                            final attendeeAdapter attendeeAdapt = new attendeeAdapter(DayOne.this, attendanceList, date);
+                            final attendeeAdapter attendeeAdapt = new attendeeAdapter(DayFour.this, attendanceList, 18);
                             attendeeList.setAdapter(attendeeAdapt);
 
                             if (task.getResult().size() > 0) {
@@ -133,7 +131,7 @@ public class DayOne extends AppCompatActivity {
 
                                             if(t.getResult().size() - 1 > 0) {
                                                 ListView attendanceListView = findViewById(R.id.attendeeList);
-                                                final attendeeAdapter attendeeAdapt = new attendeeAdapter(DayOne.this, attendanceList, date);
+                                                final attendeeAdapter attendeeAdapt = new attendeeAdapter(DayFour.this, attendanceList, 18);
                                                 attendanceListView.setAdapter(attendeeAdapt);
                                                 attendeeAdapt.notifyDataSetChanged();
                                                 lastVisible = t.getResult().getDocuments().get(t.getResult().size() - 1);
@@ -169,7 +167,7 @@ public class DayOne extends AppCompatActivity {
 
                                             if(t.getResult().size() - 1 > 0) {
                                                 ListView attendanceListView = findViewById(R.id.attendeeList);
-                                                final attendeeAdapter attendeeAdapter = new attendeeAdapter(DayOne.this, attendanceList, date);
+                                                final attendeeAdapter attendeeAdapter = new attendeeAdapter(DayFour.this, attendanceList, 18);
                                                 attendanceListView.setAdapter(attendeeAdapter);
                                                 attendeeAdapter.notifyDataSetChanged();
                                                 lastVisible = t.getResult().getDocuments().get(t.getResult().size() - 1);
@@ -191,7 +189,7 @@ public class DayOne extends AppCompatActivity {
         launchqr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IntentIntegrator integrator = new IntentIntegrator(DayOne.this);
+                IntentIntegrator integrator = new IntentIntegrator(DayFour.this);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
                 integrator.setPrompt("Align the QR code.");
                 integrator.setCameraId(0);
@@ -225,24 +223,19 @@ public class DayOne extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 /* attendee found */;
-//                                final String dateStr = getIntent().getStringExtra("date");
-                                Log.d(TAG, "checkIn" + date);
-                                if (!document.getBoolean("checkIn" + date)) {
+                                if (!document.getBoolean("checkIn18")) {
                                     Date todayDate = Calendar.getInstance().getTime();
                                     SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
                                     final String time = timeF.format(todayDate);
 
                                     Map<String, Object> checkInInfo = new HashMap<>();
-                                    checkInInfo.put("checkIn" + date, true);
-                                    checkInInfo.put("checkIn" + date + "Time", time);
+                                    checkInInfo.put("checkIn18", true);
+                                    checkInInfo.put("checkIn18Time", time);
                                     db.collection("delegates").document(document.getString("unique_id")).update(checkInInfo);
-
-                                    qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"));
-                                    alert.showDialog(DayOne.this, "found");
                                 }
-                                } else {
+                            } else {
                                 /* id not found */
-                                Toast.makeText(DayOne.this, "Unique ID not found.", Toast.LENGTH_LONG).show();
+                                Toast.makeText(DayFour.this, "Unique ID not found.", Toast.LENGTH_LONG).show();
                             }
                         } else {
                             /* error */

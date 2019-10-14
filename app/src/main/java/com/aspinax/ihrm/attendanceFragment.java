@@ -27,11 +27,49 @@ public class attendanceFragment extends Fragment {
 
         //Redirect to specified activities
         RelativeLayout gotodayone = viewFrag.findViewById(R.id.gotodayone);
+        RelativeLayout gotodaytwo = viewFrag.findViewById(R.id.gotodaytwo);
+        RelativeLayout gotodaythree = viewFrag.findViewById(R.id.gotodaythree);
+        RelativeLayout gotodayfour = viewFrag.findViewById(R.id.gotodayfour);
 
         gotodayone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 15);
+                startActivity(intent);
+            }
+        });
+
+        gotodaytwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 15);
+                startActivity(intent);
+            }
+        });
+
+//        gotodaytwo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), DayOne.class);
+//                intent.putExtra("date", 16);
+//                startActivity(intent);
+//            }
+//        });
+        gotodaythree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 17);
+                startActivity(intent);
+            }
+        });
+        gotodayfour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), DayOne.class);
+                intent.putExtra("date", 18);
                 startActivity(intent);
             }
         });

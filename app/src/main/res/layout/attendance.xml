@@ -87,6 +87,7 @@
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/gotodaytwo"
             android:background="@drawable/borderradius"
             android:layout_marginStart="16dp"
             android:backgroundTint="#FFF4D6"
@@ -130,6 +131,7 @@
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/gotodaythree"
             android:background="@drawable/borderradius"
             android:layout_marginStart="16dp"
             android:backgroundTint="#FFEBEB"
@@ -173,6 +175,7 @@
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/gotodayfour"
             android:background="@drawable/borderradius"
             android:layout_marginStart="16dp"
             android:backgroundTint="#EBF6FF"

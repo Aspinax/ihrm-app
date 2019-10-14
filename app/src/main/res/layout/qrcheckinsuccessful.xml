@@ -12,8 +12,8 @@
         android:id="@+id/checkintext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check In"
-        android:textSize="16dp"
+        android:text="Checked-In"
+        android:textSize="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,32 +39,33 @@
             android:textColor="#FFF"/>
     </RelativeLayout>
     <TextView
-        android:id="@+id/delegatename"
+        android:id="@+id/delegatenames"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14dp"
         android:textColor="#000807"
+        android:alpha="0.88"
         android:fontFamily="@font/markmedium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/eclipse"
         android:layout_marginTop="24dp"/>
     <TextView
-        android:id="@+id/sponsorname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="10dp"
-        android:textColor="#000807"
-        android:fontFamily="@font/markmedium"
+        android:textSize="13dp"
+        android:id="@+id/sponsorname"
+        app:layout_constraintTop_toBottomOf="@id/delegatenames"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/markregular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/delegatename"
-        android:layout_marginTop="12dp"/>
+        android:textColor="#999C9B"/>
     <Button
         android:id="@+id/Done"
         android:background="@drawable/borderradius"
-        android:backgroundTint="#F2F2F2"
-        android:textColor="#75D219"
+        android:backgroundTint="#75D219"
+        android:textColor="#FFF"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -73,7 +74,7 @@
         android:fontFamily="@font/markmedium"
         android:text="Okay"
         style="?android:attr/borderlessButtonStyle"
-        app:layout_constraintTop_toBottomOf="@id/delegatename"
+        app:layout_constraintTop_toBottomOf="@id/sponsorname"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />

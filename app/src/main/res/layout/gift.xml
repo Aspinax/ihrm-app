@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <RelativeLayout
+                android:id="@+id/gotogiftdayone"
                 android:background="@drawable/borderradius"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="#FDEEE0"
@@ -86,6 +87,7 @@
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/gotogiftdaytwo"
                 android:background="@drawable/borderradius"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="#E1EDFF"
@@ -129,6 +131,7 @@
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/gotogiftdaythree"
                 android:background="@drawable/borderradius"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="#F7EBFF"
@@ -172,6 +175,7 @@
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/gotogiftdayfour"
                 android:background="@drawable/borderradius"
                 android:layout_marginStart="16dp"
                 android:backgroundTint="#DEFFDF"

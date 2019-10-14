@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -13,8 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".PaidDelegates"></activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".DayOne" />
+<!--        <activity android:name=".DayTwo" />-->
+<!--        <activity android:name=".DayThree" />-->
+<!--        <activity android:name=".DayFour" />-->
+        <activity android:name=".UnpaidDelegates"></activity>
+        <activity android:name=".CreditDelegates" />
+        <activity android:name=".GiftReportDayFour" />
+        <activity android:name=".GiftReportDayThree" />
+        <activity android:name=".GiftReportDayTwo" />
+        <activity android:name=".GiftReportDayOne" />
+        <activity android:name=".ReportDayFour" />
+        <activity android:name=".ReportDayThree" />
+        <activity android:name=".ReportDayTwo" />
+        <activity android:name=".ReportDayOne" />
+        <activity android:name=".GiftDayFour" />
+        <activity android:name=".GiftDayThree" />
+        <activity android:name=".GiftDayTwo" />
+        <activity android:name=".GiftDayOne" />
+        <activity android:name=".SignupActivity" />
+        <activity android:name=".Bridge" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -3,59 +3,103 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="16dp"
+    android:background="#FFF"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
-
-
+<ImageView
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginTop="144dp"
+    android:layout_width="40dp"
+    android:id="@+id/loginlogo"
+    android:layout_height="40dp"
+    android:src="@drawable/logo"/>
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/loginlogo"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IHRM"
+        android:id="@+id/logotext"
+        android:textColor="#000807"
+        android:textSize="16dp"
+        android:fontFamily="@font/markbold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        app:layout_constraintTop_toBottomOf="@id/logotext"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/markregular"
+        android:layout_marginTop="24dp"
+        android:textColor="#8B8B8B"
+        android:id="@+id/eventreason"
+        android:text="Event Management Platform"/>
     <LinearLayout
-        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/eventreason"
+        app:layout_constraintBottom_toTopOf="@id/loginBtn"
         android:layout_width="match_parent"
-        android:orientation="vertical">
-
+        android:layout_height="wrap_content">
         <EditText
             android:id="@+id/loginEmail"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:height="40dp"
+            android:layout_height="wrap_content"
             android:hint="@string/login_email"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="8dp"
-            android:textColor="#606165"
+            android:paddingStart="8dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="16dp"
+            android:textColor="#000807"
+            android:fontFamily="@font/markregular"
             android:textSize="14sp"
-            tools:ignore="MissingPrefix"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="286dp" />
+            android:background="@drawable/borderbottom"
+            android:textColorHint="#707070"
+            tools:ignore="MissingPrefix" />
 
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:height="40dp"
-            android:hint="@string/login_password"
-            android:paddingStart="10dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="8dp"
-            android:textColor="#606165"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/borderbottom"
+            android:fontFamily="@font/markregular"
+            android:hint="Enter Password"
+            app:passwordToggleEnabled="true"
+            android:inputType="textPassword"
+            android:paddingStart="8dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="16dp"
+            android:textColor="#000807"
+            android:textColorHint="#707070"
             android:textSize="14sp"
-            tools:ignore="MissingPrefix"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="345dp" />
+            tools:ignore="MissingPrefix" />
+    </LinearLayout>
 
         <Button
             android:id="@+id/loginBtn"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@drawable/borderradius16"
+            android:backgroundTint="#193E72"
+            android:textColor="#FFF"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/loginBtn"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="426dp" />
+            android:layout_height="56dp"
+            android:textSize="13dp"
+            android:fontFamily="@font/markmedium"
+            android:text="Sign In"
+            android:drawableEnd="@drawable/ic_chevron"
+            style="?android:attr/borderlessButtonStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
