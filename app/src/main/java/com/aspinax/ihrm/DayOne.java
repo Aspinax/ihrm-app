@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -88,11 +89,50 @@ public class DayOne extends AppCompatActivity {
         final String text = getIntent().getExtras().getString("text");
 
         // Search
-        EditText search = findViewById(R.id.search);
+        EditText search = findViewById(R.id.searchQuery);
         TextView dateView = findViewById(R.id.firstdatetext);
         TextView textView = findViewById(R.id.attendancelisttext);
         dateView.setText(date + "th October 2019");
         textView.setText(text);
+
+        // Search Stuff
+        final Button searchBtn = findViewById(R.id.searchBtnAtt);
+        final String searchQuery = search.getText().toString();
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("delegates")
+                        .orderBy("attendee")
+                        .startAt(searchQuery)
+                        .endAt(searchQuery + '\uf8ff')
+                        .limit(25)
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    final List<Attendees> attendanceList = new ArrayList<>();
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Attendees attend = document.toObject(Attendees.class);
+                                        Log.e("attend", attend.getAttendee() + searchQuery);
+                                        attendanceList.add(attend);
+                                    }
+
+                                    ListView attendeeList = findViewById(R.id.attendeeList);
+                                    final attendeeAdapter attendeeAdapt = new attendeeAdapter(DayOne.this, attendanceList, date);
+                                    attendeeList.setAdapter(attendeeAdapt);
+                                    attendeeAdapt.notifyDataSetChanged();
+
+                                    if (task.getResult().size() > 0) {
+                                        lastVisible = task.getResult().getDocuments().get(task.getResult().size() - 1);
+                                        firstVisible = task.getResult().getDocuments().get(0);
+                                    }
+                                }
+                            }
+                        });
+            }
+            });
 
         db.collection("delegates")
                 .orderBy("attendee").limit(25)
@@ -270,7 +310,7 @@ public class DayOne extends AppCompatActivity {
                                     mp.start();
                                 }else{
                                     CheckinError alert = new CheckinError();
-                                    alert.showDialog(DayOne.this, "Kindly redirect to the finance desk.");
+                                    alert.showDialog(DayOne.this, "Kindly redirect to the finance desk.", document.getString("unique_id"), document.getString("attendee"), document.getString("sponsor_name"));
                                     error.start();
                                 }
 

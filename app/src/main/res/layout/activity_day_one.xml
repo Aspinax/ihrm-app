@@ -42,7 +42,7 @@
         android:fontFamily="@font/markregular"
         android:text="" />
     <EditText
-        android:id="@+id/search"
+        android:id="@+id/searchQuery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/firstdatetext"
         android:layout_width="match_parent"
@@ -56,6 +56,7 @@
         android:textColorHint="#CCC"
         android:textCursorDrawable="@drawable/cursor"
         android:textSize="13dp"
+        android:text="Ali"
         android:drawableEnd="@drawable/ic_search"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -72,9 +73,17 @@
         android:textSize="13dp"
         android:layout_marginTop="40dp"
         android:textColor="#8B8B8B"/>
+
+    <Button
+        android:id="@+id/searchBtnAtt"
+        app:layout_constraintTop_toBottomOf="@id/searchQuery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
     <ListView
         android:id="@+id/attendeeList"
-        app:layout_constraintTop_toBottomOf="@id/search"
+        app:layout_constraintTop_toBottomOf="@id/searchQuery"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -85,11 +94,13 @@
         android:layout_marginBottom="0dp"
         android:divider="@null"
         android:layout_weight="1"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="0dp">
+
+    </ListView>
 
     <LinearLayout
         android:background="@drawable/ic_clouds"
-        app:layout_constraintTop_toBottomOf="@id/search"
+        app:layout_constraintTop_toBottomOf="@id/searchQuery"
         android:layout_width="match_parent"
         android:layout_height="32dp"/>
     <LinearLayout

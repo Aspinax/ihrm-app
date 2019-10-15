@@ -42,6 +42,57 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/gotototaldelegates1"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#EBF6FF"
+            android:background="@drawable/borderradius"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp">
+            <ImageView
+                android:id="@+id/total1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_diary"/>
+
+            <TextView
+                android:id="@+id/text31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/total1"
+                android:layout_marginTop="12dp"
+                android:textSize="12dp"
+                android:fontFamily="@font/markregular"
+                android:textColor="#0090FF"
+                android:text="Add Delegate" />
+            <TextView
+                android:id="@+id/total_delegates1"
+                android:layout_below="@+id/text31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/markbold"
+                android:textColor="#000807"
+                android:textSize="14dp"
+                android:text="@string/loading"
+                android:layout_marginTop="32dp"/>
+            <TextView
+                android:layout_below="@+id/total_delegates1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/markregular"
+                android:alpha="0.4"
+                android:textColor="#000807"
+                android:textSize="12dp"
+                android:text="Delegates"
+                android:layout_marginTop="8dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/gotototaldelegates"
             android:layout_width="316dp"
             android:layout_height="wrap_content"

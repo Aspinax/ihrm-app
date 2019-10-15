@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaidDelegates"></activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".PaidDelegates" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".DayOne" />
-        <activity android:name=".UnpaidDelegates"></activity>
+        <activity android:name=".UnpaidDelegates" />
         <activity android:name=".CreditDelegates" />
         <activity android:name=".GiftReportDayFour" />
         <activity android:name=".GiftReportDayThree" />
@@ -29,7 +30,6 @@
         <activity android:name=".ReportDayOne" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".Bridge" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

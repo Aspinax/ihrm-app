@@ -42,8 +42,17 @@
         android:text="Done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/errPaymentStatus"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="183dp"
+        app:layout_constraintTop_toBottomOf="@id/DialogMessage"/>
+
     <Button
-        android:id="@+id/Done"
+        android:id="@+id/errUpdate"
         android:background="@drawable/borderradius"
         android:backgroundTint="#FF4848"
         android:textColor="#FFF"
@@ -53,9 +62,9 @@
         android:layout_marginTop="40dp"
         android:textSize="13dp"
         android:fontFamily="@font/markmedium"
-        android:text="Okay"
+        android:text="Update"
         style="?android:attr/borderlessButtonStyle"
-        app:layout_constraintTop_toBottomOf="@id/DialogMessage"
+        app:layout_constraintTop_toBottomOf="@id/errPaymentStatus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />

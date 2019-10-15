@@ -38,6 +38,15 @@ public class homeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewhomeFrag=inflater.inflate(R.layout.home, container, false);
 
+        RelativeLayout goto_addDelegate = viewhomeFrag.findViewById(R.id.gotototaldelegates1);
+        goto_addDelegate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
         /*massive redirecting happening here
 
         RelativeLayout gotopaiddelegates = viewhomeFrag.findViewById(R.id.gotopaiddelegates);
