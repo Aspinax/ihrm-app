@@ -90,8 +90,6 @@ public class qrcheckinSuccessful{
             }
         });
 
-
-
         dialog.show();
 
     }

@@ -38,7 +38,7 @@ public class homeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewhomeFrag=inflater.inflate(R.layout.home, container, false);
 
-        //massive redirecting happening here
+        /*massive redirecting happening here
 
         RelativeLayout gotopaiddelegates = viewhomeFrag.findViewById(R.id.gotopaiddelegates);
         RelativeLayout gotocreditdelegates = viewhomeFrag.findViewById(R.id.gotocreditdelegates);
@@ -135,7 +135,7 @@ public class homeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        */
         //end of massive redirects
         return viewhomeFrag;
     }

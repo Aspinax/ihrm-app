@@ -22,12 +22,36 @@ import java.util.regex.Pattern;
 
 
 public class attendeeAdapter extends ArrayAdapter<Attendees> {
+    MediaPlayer MediaPlayer;
+
     private Integer date;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public attendeeAdapter(Context context, List<Attendees> object, Integer date){
         super(context,0, object);
         this.date = date;
+    }
+
+    public abstract class DoubleClickListener implements View.OnClickListener {
+
+        private static final long DOUBLE_CLICK_TIME_DELTA = 300;//milliseconds
+
+        long lastClickTime = 0;
+
+        @Override
+        public void onClick(View v) {
+            long clickTime = System.currentTimeMillis();
+            if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA){
+                onDoubleClick(v);
+                lastClickTime = 0;
+            } else {
+                onSingleClick(v);
+            }
+            lastClickTime = clickTime;
+        }
+
+        public abstract void onSingleClick(View v);
+        public abstract void onDoubleClick(View v);
     }
 
     private String capitalize(String capString){
@@ -83,22 +107,40 @@ public class attendeeAdapter extends ArrayAdapter<Attendees> {
         }
 
         RelativeLayout checkindelegate = convertView.findViewById(R.id.checkindelegate);
-        checkindelegate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Map<String, Object> checkInInfo = new HashMap<>();
-//                checkInInfo.put("checkIn" + date, true);
-//                db.collection("delegates").document(attendee.getUnique_id()).update(checkInInfo);
+        final MediaPlayer mp = MediaPlayer.create (getContext(), R.raw.success);
+        final MediaPlayer error = MediaPlayer.create (getContext(), R.raw.error);
 
-                CheckinSuccessful alert = new CheckinSuccessful();
-                alert.showDialog((Activity)getContext(), "You may now let the attendee in!");
+        checkindelegate.setOnClickListener(new DoubleClickListener() {
+
+            @Override
+            public void onSingleClick(View v) {
+
+            }
+
+            @Override
+            public void onDoubleClick(View v) {
+                String getpaymentstatus = attendee.getPayment_status();
+                if(getpaymentstatus.equals("PAID")) {
+                    Map<String, Object> checkInInfo = new HashMap<>();
+                    checkInInfo.put("checkIn" + date, true);
+                    db.collection("delegates").document(attendee.getUnique_id()).update(checkInInfo);
+                    CheckinSuccessful alert = new CheckinSuccessful();
+                    alert.showDialog((Activity)getContext(), "You may now let the attendee in!");
+                    mp.start();
+                }else if (getpaymentstatus.equals("CREDIT")){
+                    Map<String, Object> checkInInfo = new HashMap<>();
+                    checkInInfo.put("checkIn" + date, true);
+                    db.collection("delegates").document(attendee.getUnique_id()).update(checkInInfo);
+                    CheckinSuccessful alert = new CheckinSuccessful();
+                    alert.showDialog((Activity)getContext(), "You may now let the attendee in!");
+                    mp.start();
+                }else if (getpaymentstatus.equals("")){
+                    CheckinError alert = new CheckinError();
+                    alert.showDialog((Activity)getContext(), "Kindly redirect to the finance desk.");
+                    error.start();
+                }
             }
         });
-
-
-
         return convertView;
-
-
     }
 }

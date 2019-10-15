@@ -1,7 +1,9 @@
 package com.aspinax.ihrm;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -225,6 +227,8 @@ public class DayOne extends AppCompatActivity {
 
                 /* fetch attendee information from firebase */
                 DocumentReference ticketRef = db.collection("delegates").document(result.getContents());
+                final MediaPlayer mp = MediaPlayer.create (this, R.raw.success);
+                final MediaPlayer error = MediaPlayer.create (this, R.raw.error);
                 ticketRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -233,20 +237,44 @@ public class DayOne extends AppCompatActivity {
                             if (document.exists()) {
                                 /* attendee found */;
 //                                final String dateStr = getIntent().getStringExtra("date");
+                                String getpaymentstatus = document.getString("payment_status");
+                                if(getpaymentstatus.equals("PAID")) {
+                                    if (!document.getBoolean(event + date)) {
+                                        Date todayDate = Calendar.getInstance().getTime();
+                                        SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
+                                        final String time = timeF.format(todayDate);
 
-                                if (!document.getBoolean(event + date)) {
-                                    Date todayDate = Calendar.getInstance().getTime();
-                                    SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
-                                    final String time = timeF.format(todayDate);
+                                        Map<String, Object> checkInInfo = new HashMap<>();
+                                        checkInInfo.put(event + date, true);
+                                        checkInInfo.put(event + date + "Time", time);
+                                        db.collection("delegates").document(document.getString("unique_id")).update(checkInInfo);
+                                    }
 
-                                    Map<String, Object> checkInInfo = new HashMap<>();
-                                    checkInInfo.put(event + date, true);
-                                    checkInInfo.put(event + date + "Time", time);
-                                    db.collection("delegates").document(document.getString("unique_id")).update(checkInInfo);
+                                    qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"), event);
+                                    alert.showDialog(DayOne.this, "found");
+                                    mp.start();
+                                }else if(getpaymentstatus.equals("CREDIT")){
+                                    if (!document.getBoolean(event + date)) {
+                                        Date todayDate = Calendar.getInstance().getTime();
+                                        SimpleDateFormat timeF = new SimpleDateFormat("HH:mm:ss");
+                                        final String time = timeF.format(todayDate);
+
+                                        Map<String, Object> checkInInfo = new HashMap<>();
+                                        checkInInfo.put(event + date, true);
+                                        checkInInfo.put(event + date + "Time", time);
+                                        db.collection("delegates").document(document.getString("unique_id")).update(checkInInfo);
+                                    }
+
+                                    qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"), event);
+                                    alert.showDialog(DayOne.this, "found");
+                                    mp.start();
+                                }else{
+                                    CheckinError alert = new CheckinError();
+                                    alert.showDialog(DayOne.this, "Kindly redirect to the finance desk.");
+                                    error.start();
                                 }
 
-                                qrcheckinSuccessful alert = new qrcheckinSuccessful(document.getString("attendee"), document.getString("sponsor_name"), event);
-                                alert.showDialog(DayOne.this, "found");
+
                                 } else {
                                 /* id not found */
                                 Toast.makeText(DayOne.this, "Unique ID not found.", Toast.LENGTH_LONG).show();

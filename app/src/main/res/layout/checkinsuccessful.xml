@@ -15,7 +15,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="64dp"
-        android:src="@drawable/ic_badge"
+        android:src="@drawable/ic_checked"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,8 +45,8 @@
     <Button
         android:id="@+id/Done"
         android:background="@drawable/borderradius"
-        android:backgroundTint="#F2F2F2"
-        android:textColor="#75D219"
+        android:backgroundTint="#75D219"
+        android:textColor="#FFF"
         android:textAllCaps="false"
         android:layout_width="match_parent"
         android:layout_height="48dp"
