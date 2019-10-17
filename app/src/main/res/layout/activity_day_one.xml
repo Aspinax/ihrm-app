@@ -56,11 +56,24 @@
         android:textColorHint="#CCC"
         android:textCursorDrawable="@drawable/cursor"
         android:textSize="13dp"
-        android:text="Ali"
-        android:drawableEnd="@drawable/ic_search"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:backgroundTint="#F5F5F5"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/searchBtnAtt"
+        app:layout_constraintTop_toTopOf="@id/searchQuery"
+        app:layout_constraintEnd_toEndOf="@id/searchQuery"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"/>
+    </LinearLayout>
     <TextView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,13 +86,6 @@
         android:textSize="13dp"
         android:layout_marginTop="40dp"
         android:textColor="#8B8B8B"/>
-
-    <Button
-        android:id="@+id/searchBtnAtt"
-        app:layout_constraintTop_toBottomOf="@id/searchQuery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search" />
 
     <ListView
         android:id="@+id/attendeeList"

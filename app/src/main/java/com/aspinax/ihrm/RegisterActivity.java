@@ -1,13 +1,21 @@
 package com.aspinax.ihrm;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,6 +32,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static java.security.AccessController.getContext;
+
 public class RegisterActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String payment_status;
@@ -34,16 +44,32 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Spinner spinner = findViewById(R.id.regPaymentStatus);
-        spinner.setSelection(0);
 
         final EditText name = findViewById(R.id.regDelegateName);
         final EditText sponsor_name = findViewById(R.id.regSponsorName);
         final Button submit = findViewById(R.id.regSubmit);
+        ImageView gosomewhere = findViewById(R.id.gosomewhere);
 
+        gosomewhere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gohome = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(gohome);
+            }
+        });
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.WHITE);
+        }
+        getSupportActionBar().hide();
+
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        //end of user experience
 
         final List<String> list = new ArrayList<String>();
         list.add("CREDIT");
-        list.add("NOT PAID");
         list.add("PAID");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -51,11 +77,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 payment_status = list.get(position);
+
             }
 
             @Override
@@ -64,6 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        final MediaPlayer success = MediaPlayer.create (this, R.raw.success);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +127,11 @@ public class RegisterActivity extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                Toast.makeText(RegisterActivity.this, "Delegate Registered", Toast.LENGTH_LONG).show();
+                                                registrationSuccessful alert = new registrationSuccessful();
+                                                alert.showDialog(RegisterActivity.this, "Let the delegate in");
+                                                success.start();
+                                                name.getText().clear();
+                                                sponsor_name.getText().clear();
                                                 db.collection("n").document("totals").update("lastAssigned", lastAssigned);
                                             }
                                         })

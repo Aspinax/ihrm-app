@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,9 +27,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(Color.WHITE);
+        }
+        getSupportActionBar().hide();
+
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        //end of user experience
+
+        ImageView goto_addDelegate = findViewById(R.id.adddelegate);
+        goto_addDelegate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
         auth = FirebaseAuth.getInstance();
         if (auth.getCurrentUser() == null) {
-            Intent loginIntent = new Intent(this, Bridge.class);
+            Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
         }
 

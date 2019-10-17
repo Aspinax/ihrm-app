@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -96,7 +97,7 @@ public class DayOne extends AppCompatActivity {
         textView.setText(text);
 
         // Search Stuff
-        final Button searchBtn = findViewById(R.id.searchBtnAtt);
+        final LinearLayout searchBtn = findViewById(R.id.searchBtnAtt);
         final String searchQuery = search.getText().toString();
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
@@ -131,8 +132,8 @@ public class DayOne extends AppCompatActivity {
                                 }
                             }
                         });
-            }
-            });
+        }
+    });
 
         db.collection("delegates")
                 .orderBy("attendee").limit(25)
@@ -310,7 +311,7 @@ public class DayOne extends AppCompatActivity {
                                     mp.start();
                                 }else{
                                     CheckinError alert = new CheckinError();
-                                    alert.showDialog(DayOne.this, "Kindly redirect to the finance desk.", document.getString("unique_id"), document.getString("attendee"), document.getString("sponsor_name"));
+                                    alert.showDialog(DayOne.this, "Update delegate's payment status", document.getString("unique_id"), document.getString("attendee"), document.getString("sponsor_name"));
                                     error.start();
                                 }
 

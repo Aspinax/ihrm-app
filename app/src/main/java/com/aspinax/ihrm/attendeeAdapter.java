@@ -136,7 +136,7 @@ public class attendeeAdapter extends ArrayAdapter<Attendees> {
                     mp.start();
                 }else if (getpaymentstatus.equals("")){
                     CheckinError alert = new CheckinError();
-                    alert.showDialog((Activity)getContext(), "Kindly redirect to the finance desk.", attendee.getUnique_id(), attendee.getAttendee(), attendee.getSponsor_name());
+                    alert.showDialog((Activity)getContext(), "Update delegate's payment status.", attendee.getUnique_id(), attendee.getAttendee(), attendee.getSponsor_name());
                     error.start();
                 }
             }

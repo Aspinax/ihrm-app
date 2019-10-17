@@ -30,10 +30,10 @@ public class CheckinError {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String payment_status;
 
-    public void showDialog(final Activity activity, String msg, final String unique_id, final String attendee, final String sponsor_name){
+    public void showDialog(final Activity activity, String msg, final String unique_id, final String name, final String sponsor_name){
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
         dialog.setContentView(R.layout.checkinerror);
 
         TextView text = dialog.findViewById(R.id.DialogMessage);
@@ -43,7 +43,6 @@ public class CheckinError {
         spinner.setSelection(0);
 
         final List<String> list = new ArrayList<String>();
-        list.add("NOT PAID");
         list.add("CREDIT");
         list.add("PAID");
 
@@ -86,7 +85,7 @@ public class CheckinError {
                                 checkInInfo.put("checkIn" + day, true);
                                 checkInInfo.put("checkIn" + day + "Time", time);
                                 db.collection("delegates").document(unique_id).update(checkInInfo);
-                                qrcheckinSuccessful alert = new qrcheckinSuccessful(attendee, sponsor_name, "checkIn");
+                                qrcheckinSuccessful alert = new qrcheckinSuccessful(name, sponsor_name, "checkIn");
                                 alert.showDialog(activity, "found");
                             }
                         })

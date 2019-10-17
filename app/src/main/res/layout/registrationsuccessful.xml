@@ -15,7 +15,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="64dp"
-        android:src="@drawable/ic_error"
+        android:src="@drawable/ic_checked"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -30,7 +30,7 @@
         android:textSize="16dp"
         android:fontFamily="@font/markbold"
         android:textColor="#000807"
-        android:text="Unpaid Booking"/>
+        android:text="Registration Successful"/>
     <TextView
         android:id="@+id/DialogMessage"
         android:fontFamily="@font/markregular"
@@ -39,22 +39,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/successmessage"
         android:layout_marginTop="16dp"
-        android:text="Update delegate's payment status"
+        android:text="Done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <Spinner
-        android:id="@+id/errPaymentStatus"
-        android:layout_width="match_parent"
-        android:layout_marginTop="24dp"
-        android:layout_height="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/DialogMessage"/>
-
     <Button
-        android:id="@+id/errUpdate"
+        android:id="@+id/Done"
         android:background="@drawable/borderradius"
-        android:backgroundTint="#FF4848"
+        android:backgroundTint="#75D219"
         android:textColor="#FFF"
         android:textAllCaps="false"
         android:layout_width="match_parent"
@@ -62,9 +53,9 @@
         android:layout_marginTop="40dp"
         android:textSize="13dp"
         android:fontFamily="@font/markmedium"
-        android:text="Update"
+        android:text="Okay"
         style="?android:attr/borderlessButtonStyle"
-        app:layout_constraintTop_toBottomOf="@id/errPaymentStatus"
+        app:layout_constraintTop_toBottomOf="@id/DialogMessage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
